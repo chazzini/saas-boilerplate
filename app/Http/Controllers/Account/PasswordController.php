@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordUpdateRequest;
+use App\Mail\Account\PasswordUpdated;
 use Hash;
 use Illuminate\Http\Request;
 use Auth;
+use Mail;
 
 class PasswordController extends Controller
 {
@@ -20,6 +22,7 @@ class PasswordController extends Controller
 
 
         Auth::user()->update(['password' => Hash::make($request->password)]);
+        Mail::to($request->user()->email)->send(new PasswordUpdated());
 
         return redirect()->back();
     }
