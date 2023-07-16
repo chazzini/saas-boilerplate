@@ -24,6 +24,6 @@ class PasswordController extends Controller
         Auth::user()->update(['password' => Hash::make($request->password)]);
         Mail::to($request->user()->email)->send(new PasswordUpdated());
 
-        return redirect()->back();
+        return redirect()->back()->withSuccess('Password was updated successfully');
     }
 }

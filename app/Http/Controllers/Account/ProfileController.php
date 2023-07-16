@@ -22,6 +22,6 @@ class ProfileController extends Controller
             $request->only(['name', 'email'])
         );
 
-        return redirect()->back()->with('success', 'Profile successfully updated');
+        return redirect()->back()->withSuccess('Profile successfully updated');
     }
 }
